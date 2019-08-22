@@ -1,46 +1,23 @@
 package com.ing;
 
+import com.ing.pages.HomePage;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SearchTest {
-    private WebDriver driver;
-    private long startTime;
+public class SearchTest extends BaseTest {
 
-    @BeforeEach
-    public void startUpBrowser() {
-        startTime = System.nanoTime();
-        System.setProperty("webdriver.chrome.driver", "/Users/mbruno/Katas/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
-        driver = new ChromeDriver(options);
-
-
-    }
+    private HomePage home = new HomePage();
 
     @Test
     public void test() throws IOException {
-        //start at home
-        driver.get("http://en.wikipedia.org/");
-
-        // search and enter
-        WebElement search = driver.findElement(By.xpath("//*[@id=\"searchInput\"]"));
-        search.sendKeys("java");
-        search.sendKeys(Keys.RETURN);
+        home.search("java");
 
         //select tab
         driver.findElement(By.xpath("//*[@id=\"ca-history\"]/span/a")).click();
@@ -56,11 +33,5 @@ public class SearchTest {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(screenshot, new File("images/screenshot.png"));
 
-    }
-
-    @AfterEach
-    public void closeBrowser() {
-        driver.close();
-        System.out.println(((System.nanoTime() - startTime)/1000000000));
     }
 }
