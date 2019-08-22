@@ -1,25 +1,28 @@
 package com.ing;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
-    protected WebDriver driver;
-    protected long startTime;
+    WebDriver driver;
+    long startTime;
 
-    @BeforeEach
+    @BeforeAll
     public void startUpBrowser() {
         startTime = System.nanoTime();
-        System.setProperty("webdriver.chrome.driver", "/Users/mbruno/Katas/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1920,1200","--ignore-certificate-errors");
-        driver = new ChromeDriver(options);
+        driver = DriverFactory.getDriver();
     }
 
-    @AfterEach
+    @BeforeEach
+    public void goToHome() {
+        driver.get("http://en.wikipedia.org/");
+    }
+
+    @AfterAll
     public void closeBrowser() {
         driver.close();
         System.out.println(((System.nanoTime() - startTime)/1000000000));

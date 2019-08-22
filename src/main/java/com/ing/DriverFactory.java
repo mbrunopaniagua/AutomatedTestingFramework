@@ -15,8 +15,8 @@ public class DriverFactory {
     private static ChromeOptions getOptions() {
         if (options == null) {
             options = new ChromeOptions();
-//        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
-            options.addArguments("--window-size=1920,1200","--ignore-certificate-errors");
+        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
+//            options.addArguments("--window-size=1920,1200","--ignore-certificate-errors");
         }
         return options;
     }
