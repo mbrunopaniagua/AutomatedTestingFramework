@@ -19,17 +19,17 @@ public class SearchTest extends BaseTest {
     public void test() throws IOException {
         home.search("java");
 
-        //select tab
-        driver.findElement(By.xpath("//*[@id=\"ca-history\"]/span/a")).click();
-        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"firstHeading\"]")).isDisplayed());
-        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"firstHeading\"]")).getText().contains("Revision history"));
+        //filter by most votes
+        driver.findElement(By.xpath("//*[@id=\"mainbar\"]/div[4]/div/div[2]/div/div[3]/button")).click();
+        driver.findElement(By.xpath("//input[@type='radio'][@value='MostVotes']")).click();
+        driver.findElement(By.xpath("//*[@id=\"uql-form\"]/div/div/div[2]/div/div[1]/button")).click();
 
-        //Compare article
-        driver.findElement(By.xpath("//*[@id=\"mw-history-compare\"]/div[1]/input")).click();
+        //select most voted post
+        driver.findElement(By.xpath("//*[@id=\"question-summary-11227809\"]/div[2]/h3/a")).click();
 
         //verify title
-        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"firstHeading\"]")).isDisplayed());
-        Assertions.assertEquals("Java: Difference between revisions", driver.findElement(By.xpath("//*[@id=\"firstHeading\"]")).getText());
+        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"question\"]/div[2]/div[1]/div/button[1]")).isDisplayed());
+        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"h-linked\"]")).isDisplayed());
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(screenshot, new File("images/screenshot.png"));
 

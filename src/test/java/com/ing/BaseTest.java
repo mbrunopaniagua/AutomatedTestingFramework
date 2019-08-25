@@ -19,7 +19,7 @@ public class BaseTest {
 
     @BeforeEach
     public void goToHome() {
-        driver.get("http://en.wikipedia.org/");
+        driver.get("https://stackoverflow.com/");
     }
 
     @AfterAll

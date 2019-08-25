@@ -11,7 +11,7 @@ public class HomePage {
 
     public void search(String value) {
         // search and enter
-        WebElement search = driver.findElement(By.xpath("//*[@id=\"searchInput\"]"));
+        WebElement search = driver.findElement(By.xpath("//*[@id=\"search\"]/div/input"));
         search.sendKeys(value);
         search.sendKeys(Keys.RETURN);
     }
