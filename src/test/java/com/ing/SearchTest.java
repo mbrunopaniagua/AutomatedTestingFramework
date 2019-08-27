@@ -21,11 +21,11 @@ public class SearchTest extends BaseTest {
     public void test() throws IOException {
         home.search("java");
 
-        search.sortedByMostVoted();
-        search.selectPost();
+        search.sortedByMostVoted()
+                .selectPost();
 
-        post.verifyVoteUpIsDisplayed();
-        post.verifyLinkedSideBarIsDisplayed();
+        post.verifyVoteUpIsDisplayed()
+                .verifyLinkedSideBarIsDisplayed();
 
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(screenshot, new File("images/screenshot.png"));
