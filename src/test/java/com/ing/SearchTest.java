@@ -11,11 +11,15 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 import java.io.IOException;
 
+import static com.ing.pages.HomePage.getHomePage;
+import static com.ing.pages.PostPage.getPostPage;
+import static com.ing.pages.SearchPage.getSearchPage;
+
 public class SearchTest extends BaseTest {
 
-    private HomePage home = new HomePage();
-    private SearchPage search = new SearchPage();
-    private PostPage post = new PostPage();
+    private HomePage home = getHomePage();
+    private SearchPage search = getSearchPage();
+    private PostPage post = getPostPage();
 
     @Test
     public void test() throws IOException {

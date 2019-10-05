@@ -18,7 +18,7 @@ public class BaseTest {
     }
 
     @BeforeEach
-    public void goToHome() {
+    public void goHome() {
         driver.get("https://stackoverflow.com/");
     }
 

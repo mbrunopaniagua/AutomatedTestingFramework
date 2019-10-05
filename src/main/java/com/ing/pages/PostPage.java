@@ -8,6 +8,14 @@ import org.junit.jupiter.api.Assertions;
 public class PostPage {
     private WebDriver driver = DriverFactory.getDriver();
 
+    private PostPage() {
+        // hide it
+    }
+
+    public static PostPage getPostPage() {
+        return new PostPage();
+    }
+
     public PostPage verifyVoteUpIsDisplayed() {
         Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"question\"]/div[2]/div[1]/div/button[1]")).isDisplayed());
         return this;

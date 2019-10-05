@@ -7,6 +7,14 @@ import org.openqa.selenium.WebDriver;
 public class SearchPage {
     private WebDriver driver = DriverFactory.getDriver();
 
+    private SearchPage() {
+        // hide it
+    }
+
+    public static SearchPage getSearchPage() {
+        return new SearchPage();
+    }
+
     public SearchPage sortedByMostVoted() {
         driver.findElement(By.xpath("//*[@id=\"mainbar\"]/div[4]/div/div[2]/div/div[3]/button")).click();
         driver.findElement(By.xpath("//input[@type='radio'][@value='MostVotes']")).click();
