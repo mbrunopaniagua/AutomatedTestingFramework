@@ -1,21 +1,13 @@
-package com.ing.pages;
+package com.ing.pages.search;
 
 import com.ing.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SearchPage {
+public class SearchActController {
     private WebDriver driver = DriverFactory.getDriver();
 
-    private SearchPage() {
-        // hide it
-    }
-
-    public static SearchPage getSearchPage() {
-        return new SearchPage();
-    }
-
-    public SearchPage sortedByMostVoted() {
+    public SearchActController sortedByMostVoted() {
         driver.findElement(By.xpath("//*[@id=\"mainbar\"]/div[4]/div/div[2]/div/div[3]/button")).click();
         driver.findElement(By.xpath("//input[@type='radio'][@value='MostVotes']")).click();
         driver.findElement(By.xpath("//*[@id=\"uql-form\"]/div/div/div[2]/div/div[1]/button")).click();

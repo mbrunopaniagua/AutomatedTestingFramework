@@ -1,8 +1,8 @@
 package com.ing;
 
-import com.ing.pages.HomePage;
-import com.ing.pages.SearchPage;
-import com.ing.util.CommonVerification;
+import com.ing.pages.home.HomePage;
+import com.ing.pages.post.PostPage;
+import com.ing.pages.search.SearchPage;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.OutputType;
@@ -11,26 +11,29 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 import java.io.IOException;
 
-import static com.ing.pages.HomePage.getHomePage;
-import static com.ing.pages.PostPage.linkedSideBar;
-import static com.ing.pages.PostPage.voteUpButton;
-import static com.ing.pages.SearchPage.getSearchPage;
+import static com.ing.pages.home.HomePage.getHomePage;
+import static com.ing.pages.post.PostPage.getPostPage;
+import static com.ing.pages.search.SearchPage.getSearchPage;
 
 public class SearchTest extends BaseTest {
 
     private HomePage home = getHomePage();
     private SearchPage search = getSearchPage();
-    private CommonVerification common = CommonVerification.getCommonVerification();
+    private PostPage post = getPostPage();
 
     @Test
     public void test() throws IOException {
-        home.search("java");
+        home.act().
+                search("java");
 
-        search.sortedByMostVoted()
+        search.act()
+                .sortedByMostVoted()
                 .selectPost();
 
-        common.verifyIsDisplayed(voteUpButton())
-                .verifyIsDisplayed(linkedSideBar());
+
+        post.verify()
+                .isDisplayedLinkedSideBar()
+                .isDisplayedVoteUpButton();
 
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(screenshot, new File("images/screenshot.png"));
