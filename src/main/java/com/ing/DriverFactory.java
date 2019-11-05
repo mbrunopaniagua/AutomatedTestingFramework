@@ -1,5 +1,6 @@
 package com.ing;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,7 +24,7 @@ public class DriverFactory {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "/Users/mbruno/Katas/chromedriver");
+            WebDriverManager.chromedriver().version("77.0.3865.40").setup();
             driver = new ChromeDriver(getOptions());
         }
         return driver;
