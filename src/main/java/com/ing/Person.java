@@ -30,8 +30,25 @@ public final class Person {
     }
 
     public static AddName builder() {
-        //return name -> surname -> phoneNumber -> () -> new Person(name, surname, phoneNumber);
-        return new AddName() {
+        return name -> surname -> {
+            return new AddPhoneNumber() {
+                @Override
+                public Builder withPhoneNumber(String phoneNumber) {
+                    return new Builder() {
+                        @Override
+                        public Person build() {
+                            return new Person(name, surname, phoneNumber);
+                        }
+                    };
+                }
+
+                @Override
+                public Person build() {
+                    return new Person(name, surname);
+                }
+            };
+        };
+        /*return new AddName() {
             @Override
             public AddSurname withName(String name) {
                 return new AddSurname() {
@@ -56,7 +73,7 @@ public final class Person {
                     }
                 };
             }
-        };
+        };*/
     }
 
     @FunctionalInterface
@@ -78,24 +95,4 @@ public final class Person {
     public interface Builder {
         Person build();
     }
-
-    /*@FunctionalInterface
-    public interface AddName {
-        AddSurname withName(String name);
-    }
-
-    @FunctionalInterface
-    public interface AddSurname {
-        AddPhoneNumber withSurname(String surname);
-    }
-
-    @FunctionalInterface
-    public interface AddPhoneNumber {
-        Builder withPhoneNumber(String phoneNumber);
-    }
-
-    @FunctionalInterface
-    public interface Builder {
-        Person build();
-    }*/
 }
